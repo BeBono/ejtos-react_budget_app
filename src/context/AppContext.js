@@ -1,7 +1,7 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useReducer } from 'react'; //Use Reducer es una función propia de React al igual que createContext (no son métodos).
 
     // 5. The reducer - this is used to update the state, based on the action
-export const AppReducer = (state, action) => { //'state' takes the current state from 'store'?
+export const AppReducer = (state, action) => { //'state' es el nombre del estado de la aplicación definida dentro de AppProvider().
     let budget = 0;
     switch (action.type) {
         case 'ADD_EXPENSE':
@@ -43,6 +43,21 @@ export const AppReducer = (state, action) => { //'state' takes the current state
                     ...state,
                     expenses: [...red_expenses],
                 };
+
+
+                case 'DECREASE_EXPENSE':  
+                state.expenses.map((currentExp)=> { //Recorre el arreglo 'expenses'
+                    if(currentExp.name === action.payload.name) { //Asses when 'name' from Action makes match.
+                        currentExp.cost = currentExp.cost - action.payload.cost; //Modify the array copied from 'state.expenses'. Resta el costo actual - 10 (que está cargado en 'cost').
+                    }
+                    return currentExp //Return nuevo estado y lo actualiza .
+                });
+
+                return {
+                    ...state,
+                };
+                
+
             case 'DELETE_EXPENSE':
             action.type = "DONE";
             state.expenses.map((currentExp)=> {
@@ -96,7 +111,7 @@ export const AppContext = createContext();
 // Accepts the children, which are the nested(wrapped) components
 export const AppProvider = (props) => {
     // 4. Sets up the app state. takes a reducer, and an initial state
-    const [state, dispatch] = useReducer(AppReducer, initialState);
+    const [state, dispatch] = useReducer(AppReducer, initialState); //La función/hook useReducer en React simplemente espera que la función reductora (primer parámetro) que se proporciona siga la estructura estándar con dos argumentos: el primer argumento representa el estado actual y el segundo argumento es la acción que desencadena la actualización del estado (AppReducer(state, action)).
     let remaining = 0;
 
     if (state.expenses) {
@@ -120,3 +135,24 @@ export const AppProvider = (props) => {
         </AppContext.Provider>
     );
 };
+
+
+// NOTAS:
+
+// ******
+// const [state, dispatch] = useReducer(AppReducer, initialState);
+
+// state representa el estado actual del componente. En el momento en que se llama a useReducer, state tendrá el valor inicial que proporcionaste en initialState.
+
+// dispatch es una función que se utiliza para enviar acciones que desencadenan actualizaciones en el estado. Cuando llamas a dispatch, pasas una acción como argumento, y esa acción se envía a la función reductora (AppReducer en este caso) junto con el estado actual. La función reductora procesa la acción y el estado actual y devuelve un nuevo estado, que luego se almacena en state.
+
+// La función reductora (AppReducer en tu ejemplo) debe seguir una estructura estándar. Debe aceptar dos argumentos: el estado actual y la acción.
+
+// Cualquier de estas palagras dentro de la expresión puede ser personalizad, excepto el nombre del hook 'useReducer' propio de React.
+
+// ******
+
+//si se desea acceder al arreglo de gastos dentro de tu función reducer o en cualquier otro lugar donde tengas acceso al estado, puedes hacerlo utilizando state.expenses.
+
+// ******
+
