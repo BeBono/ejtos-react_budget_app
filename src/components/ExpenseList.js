@@ -12,11 +12,12 @@ const ExpenseList = () => {
               <th scope="col">Department</th>
               <th scope="col">Allocated Budget</th>
               <th scope="col">Increase by 10</th>
+              <th scope="col">Decrease by 10</th>   {/* my */}
               <th scope="col">Delete</th>
             </tr>
           </thead>
             <tbody>
-            {expenses.map((expense) => (
+            {expenses.map((expense) => (  //'espense' could be any word. This represent only a base to retrives the propertyes in every element from 'expenses' array.
                 <ExpenseItem id={expense.id} key={expense.id} name={expense.name} cost={expense.cost} />
             ))}
             </tbody>
