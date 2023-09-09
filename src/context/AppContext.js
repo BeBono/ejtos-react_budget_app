@@ -46,15 +46,22 @@ export const AppReducer = (state, action) => { //'state' es el nombre del estado
 
 
                 case 'DECREASE_EXPENSE':  
-                state.expenses.map((currentExp)=> { //Recorre el arreglo 'expenses'
-                    if(currentExp.name === action.payload.name) { //Asses when 'name' from Action makes match.
-                        currentExp.cost = currentExp.cost - action.payload.cost; //Modify the array copied from 'state.expenses'. Resta el costo actual - 10 (que está cargado en 'cost').
+                console.log('Decrease...')
+                state.expenses.map((mycurrentExp)=> { //Recorre el arreglo 'expenses'
+                    if(mycurrentExp.name === action.payload.name) { //Asses when 'name' from Action makes match.
+                        console.log(mycurrentExp.cost)
+                        
+                        mycurrentExp.cost = mycurrentExp.cost - action.payload.cost; 
+                        // Modify the array copied from 'state.expenses'. 
+                        // Resta el costo actual - 10 (que está cargado en 'cost').
+                        
                     }
-                    return currentExp //Return nuevo estado y lo actualiza .
+                    return mycurrentExp //Return nuevo estado y lo actualiza .
                 });
 
                 return {
-                    ...state,
+                    ...state, 
+                 
                 };
                 
 
