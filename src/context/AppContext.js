@@ -45,22 +45,20 @@ export const AppReducer = (state, action) => { //'state' es el nombre del estado
                 };
 
 
-                case 'DECREASE_EXPENSE':  
-                console.log('Decrease...')
-                state.expenses.map((mycurrentExp)=> { //Recorre el arreglo 'expenses'
-                    if(mycurrentExp.name === action.payload.name) { //Asses when 'name' from Action makes match.
-                        console.log(mycurrentExp.cost)
-                        
-                        mycurrentExp.cost = mycurrentExp.cost - action.payload.cost; 
-                        // Modify the array copied from 'state.expenses'. 
-                        // Resta el costo actual - 10 (que está cargado en 'cost').
-                        
+                case 'DECREASE': 
+                action.type = "DONE";  //This avoid that the case repeat     
+                console.log('Hi');
+
+                const Decrease = state.expenses.map((mycurrentExp)=> { //Recorre el arreglo 'expenses'
+                    if(mycurrentExp.name === action.payload.name) { //Asses when 'name' from Action makes match.                      
+                        mycurrentExp.cost = mycurrentExp.cost - action.payload.cost; // Modify the array copied from 'state.expenses'. // Resta el costo actual - 10 (que está cargado en 'cost').
                     }
                     return mycurrentExp //Return nuevo estado y lo actualiza .
                 });
 
+                      
                 return {
-                    ...state, 
+                    ...state, expenses: [...Decrease] 
                  
                 };
                 
@@ -87,7 +85,7 @@ export const AppReducer = (state, action) => { //'state' es el nombre del estado
                 ...state,
             };
         case 'CHG_CURRENCY':
-            action.type = "DONE";
+         action.type = "DONE";
             state.currency = action.payload;
             return {
                 ...state
@@ -96,6 +94,7 @@ export const AppReducer = (state, action) => { //'state' es el nombre del estado
         default:
             return state;
     }
+
 };
 
 // 1. Sets the initial state when the app loads
