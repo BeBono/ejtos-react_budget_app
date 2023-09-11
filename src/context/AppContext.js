@@ -46,20 +46,32 @@ export const AppReducer = (state, action) => { //'state' es el nombre del estado
 
 
                 case 'DECREASE': 
-                action.type = "DONE";  //This avoid that the case repeat     
-                const Decrease = state.expenses.map((mycurrentExp)=> { //Recorre el arreglo 'expenses'
-                    if(mycurrentExp.name === action.payload.name) { //Asses when 'name' from Action makes match.                      
-                        mycurrentExp.cost = mycurrentExp.cost - action.payload.cost; // Modify the array copied from 'state.expenses'. // Resta el costo actual - 10 (que está cargado en 'cost').
+                action.type = "DONE";  //This avoid that the case repeat.
+
+              const Decrease = state.expenses.map((mycurrentExp)=> { //Recorre el arreglo 'expenses'
+                    if(mycurrentExp.name === action.payload.name) { //Asses when 'name' from Action makes match.   
+                        
+                        if (mycurrentExp.cost === 0) {
+                            alert ('Cost is already zero');
+                            return {...state}
+                        } else {
+
+                            mycurrentExp.cost = mycurrentExp.cost - action.payload.cost; // Modify the array copied from 'state.expenses'. // Resta el costo actual - 10 (que está cargado en 'cost').
+                            return mycurrentExp //Return nuevo estado y que es cargada a la variable 'Deacrese'
+                        }
+
+                    } else {
+                        return  {...state} //Mientras se ejecuta .map y no hay coincidencias, devuelve el mismo estado.
                     }
-                    return mycurrentExp //Return nuevo estado y lo actualiza .
+
+               
                 });
 
-                      
-                return {
-                    ...state, expenses: [...Decrease] 
+                return { //Requerido para renderizar.
+                    Decrease //React detecta que el nuevo estado es el arreglo 'Decrease' y renderiza.
                  
                 };
-                
+
 
             case 'DELETE_EXPENSE':
             action.type = "DONE";
@@ -160,3 +172,9 @@ export const AppProvider = (props) => {
 
 // ******
 
+// case 'DECREASE': Dentro del contexto del reducer, no es necesario invocar explícitamente la función que moficará el estado. La lógica que contiene la función map () se ejecuta automáticamente cuando se llama al reducer en respuesta a una acción. El reducer se encarga de aplicar las modificaciones al estado y, en este caso, actualiza la propiedad expenses con el nuevo arreglo.
+
+// NOTA: Si un 'case' no contiene una función o una lógica que modifique el estado, aún así debe devolver el estado actual sin modificar. Esto se hace utilizando la declaración 'return' para devolver el estado original.
+// El 'return' puede estar anidado en un condicional, y aún así será suficiente para provocar la renderización, pero para garantizar la renderización, hay que utilizar un return al final del 'case'.
+
+// ******
