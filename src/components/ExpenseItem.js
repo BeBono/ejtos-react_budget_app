@@ -49,7 +49,7 @@ const ExpenseItem = (props) => {
         size={'1.25em'}  style={{cursor: 'pointer', userSelect:'none', color: 'green' }} > 
         </AiFillPlusCircle> </td>
 
-        <td><AiFillMinusCircle onClick={event=> decreaseAllocation(props.name)} 
+        <td><AiFillMinusCircle onClick={e=> decreaseAllocation(props.name)} 
         size={'1.25em'}  style={{cursor: 'pointer', userSelect:'none', color: 'orange' }} > 
         </AiFillMinusCircle> </td>
 

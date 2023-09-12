@@ -44,11 +44,10 @@ export const AppReducer = (state, action) => { //'state' es el nombre del estado
                     expenses: [...red_expenses],
                 };
 
-
                 case 'DECREASE': 
                 action.type = "DONE";  //This avoid that the case repeat.
 
-              const Decrease = state.expenses.map((mycurrentExp)=> { //Recorre el arreglo 'expenses'
+                const Decrease = state.expenses.map((mycurrentExp)=> { //Recorre el arreglo 'expenses'
                     if(mycurrentExp.name === action.payload.name) { //Asses when 'name' from Action makes match.   
                         
                         if (mycurrentExp.cost === 0) {
@@ -68,7 +67,7 @@ export const AppReducer = (state, action) => { //'state' es el nombre del estado
                 });
 
                 return { //Requerido para renderizar.
-                    Decrease //React detecta que el nuevo estado es el arreglo 'Decrease' y renderiza.
+                    Decrease //React detecta que eL 'Decrease' es diferente respecto a 'state' y renderiza.
                  
                 };
 
@@ -89,7 +88,7 @@ export const AppReducer = (state, action) => { //'state' es el nombre del estado
             };
         case 'SET_BUDGET':
             action.type = "DONE";
-            state.budget = action.payload;
+            state.budget = action.payload; //Actualliza el 'state' con el valor ingresado que se pasa como parámetro en el dispatch del componente 'Budget.js'
 
             return {
                 ...state,
