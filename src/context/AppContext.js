@@ -88,11 +88,25 @@ export const AppReducer = (state, action) => { //'state' es el nombre del estado
             };
         case 'SET_BUDGET':
             action.type = "DONE";
-            state.budget = action.payload; //Actualliza el 'state' con el valor ingresado que se pasa como parámetro en el dispatch del componente 'Budget.js'
 
-            return {
-                ...state,
-            };
+            //Funcion para manejo cuando el numero digitado supera los 20.0000:
+            
+                if (action.payload > 20000) {
+                    state.budget = 20000; //Load the upper budget allowed.
+                    alert ('$20000 is the maximum budget');
+                    return {
+                        ...state   // '...state' creates a copy of the original 'state' with changes, then React to render it.
+                    }
+                } else {
+                state.budget = action.payload           
+
+                     return {
+                 ...state
+                    };
+
+                }
+
+            
         case 'CHG_CURRENCY':
          action.type = "DONE";
             state.currency = action.payload;
