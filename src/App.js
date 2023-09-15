@@ -9,7 +9,8 @@ import AllocationForm from "./components/AllocationForm";
 
 import { AppProvider } from "./context/AppContext";
 import Remaining from "./components/Remaining";
-import Currency from "./components/Currency";
+// import Currency from "./components/Currency";
+import CustomSelect from "./components/Currency";
 
 const App = () => {
   return (
@@ -28,7 +29,8 @@ const App = () => {
           </div>
 
           <div className="col-sm">
-            <Currency />
+            {/* <Currency /> */}
+            <CustomSelect />
           </div>
 
         </div>

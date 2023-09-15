@@ -7,6 +7,7 @@ import { AppContext } from '../context/AppContext';
 
 const ExpenseItem = (props) => {
     const { dispatch } = useContext(AppContext);
+    const { currency } =useContext(AppContext);
 
     const handleDeleteExpense = () => {
         dispatch({
@@ -34,7 +35,7 @@ const ExpenseItem = (props) => {
             cost: 10,
         };
 
-        dispatch({ //Dispatch take an Action as parameter:
+        dispatch({ //Dispatch take an Action as parameter y lo envía al reducer ubicado en AppContex.js que centraliza/contiene el estado inicial de las variables/valores de la app y es así como cada componente por sepadao puede actuar para actualizar/interactuar con la app general:
             type: 'DECREASE',
             payload: expense
         });
@@ -44,7 +45,7 @@ const ExpenseItem = (props) => {
     return (
         <tr>
         <td>{props.name}</td>
-        <td>£{props.cost}</td>
+        <td>{ currency }{props.cost}</td>
         <td><AiFillPlusCircle onClick={event=> increaseAllocation(props.name)} 
         size={'1.25em'}  style={{cursor: 'pointer', userSelect:'none', color: 'green' }} > 
         </AiFillPlusCircle> </td>

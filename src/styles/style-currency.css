@@ -1,0 +1,68 @@
+.currency{
+   background-color: rgb(121, 199, 121); 
+   color: white;
+   display: flex;
+   align-items: center;
+   align-items: center;
+   width: 100%;
+   border: none;
+    padding: 16px;
+    padding-left: 0;
+    border-radius: 7px;
+
+}
+
+
+.mycustom-select {
+    /* background-color: blue; */
+    width: 100%;
+    font-size: 17px;
+   
+
+}
+
+
+.select-style {
+    background-color: rgb(121, 199, 121);
+    border: none;
+    width: 100%;
+    /* border: 1px solid #ccc !important; Establece un borde */
+    color: white;
+    font-size: 17px;
+    /* display: flex; */
+    justify-content: flex-end;
+   
+}
+
+.option-style {
+    background-color: rgb(121, 199, 121);
+    width: 200px;
+    color: black;
+    font-size: 17px;
+    margin: 30px;
+    /* border: 3px solid black; */
+}
+
+
+.option-style:hover {
+    background-color: rgb(255, 255, 255) !important; /* Cambia el color de fondo en hover */
+  }
+  
+
+
+
+
+/* .select .option {
+
+    /* border-radius: 10px !important ; */
+    /* background-color: rgb(4, 0, 255) !important;
+    border:  1px solid black !important;
+    size: 25px;
+     */
+
+
+/* .menu:hover  {
+    background-color: blue !important  ; 
+    
+    
+} */
