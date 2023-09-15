@@ -6,16 +6,22 @@ import '../styles/style-budget.css'
 
 const Budget = () => {
     const { budget } = useContext(AppContext);
+    const { remaining } = useContext(AppContext);
 
     const { dispatch } = useContext(AppContext); //Incorpora la funcionalidad de 'dispatch' a este componente.
 
     const {currency} =useContext(AppContext);  //Trae el valor de currency que está cargado en el estado.
 
-    const setBudget = (count) => {
+    const setBudget = (Budg) => {
+
+        const spendTotal = () => { //Devuelve al gasto "hasta ahora".
+            return (budget - remaining);
+        };
     
         dispatch({ //Dispatch take an Action as parameter:
             type: 'SET_BUDGET',
-            payload: count //value set into input tag.
+            payload: Budg, //value set into input tag new 'Budget'.
+            payload2: spendTotal() //.
         })
 
 

@@ -97,7 +97,16 @@ export const AppReducer = (state, action) => { //'state' es el nombre del estado
                     return {
                         ...state   // '...state' creates a copy of the original 'state' with changes, then React to render it.
                     }
-                } else {
+                } else if (action.payload < action.payload2) {
+                    // state.budget = 20000;
+                        // console.log(action.payload2);
+                    alert ('You cannot reduce the budget value lower than the spending!');
+                    return {
+                        ...state   // '...state' creates a copy of the original 'state' with changes, then React to render it.
+                    }
+                }
+                
+                else {
                 state.budget = action.payload           
 
                      return {
@@ -106,6 +115,7 @@ export const AppReducer = (state, action) => { //'state' es el nombre del estado
 
                 }
 
+                // 
             
         case 'CHG_CURRENCY':
          action.type = "DONE";
@@ -157,7 +167,7 @@ export const AppProvider = (props) => {
                 budget: state.budget,
                 remaining: remaining,
                 dispatch,
-                currency: state.currency
+                currency: state.currency,
             }}
         >
             {props.children}
